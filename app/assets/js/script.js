@@ -119,7 +119,7 @@ $(document).ready(function(){
 		var amount = $("#amountInput").val();
 		var d = new Date();
 		var date = d.toUTCString();
-		var img = "assets/bb.png";
+		var img = "../assets/bb.png";
 		addRow(date, 'Online Transfer', img , toAccount, amount);
 		balance = balance - amount;
 		balance = balance.toFixed(2);
