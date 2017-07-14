@@ -1,0 +1,136 @@
+$primary-color: rgb(12, 131, 151);
+$secondary-color: rgb(238, 112, 51);
+$text-dark: #222;
+$text-dark-light: #999;
+$text-light: #ecf0f1;
+$font-small: 12px;
+$font-normal: 14px;
+$font-big: 18px;
+
+body, html{
+	width: 100%;
+	height: 100%
+}
+.bb-app{
+	font-family: 'Kanit', sans-serif;
+    font-size: $font-normal;	
+	background-image:url(../background.jpg);
+	background-size: cover;
+    background-attachment: fixed;
+} 
+.bb-header{
+	width: 100%;
+	background: #fff;
+    border-bottom: 2px solid $secondary-color;
+} 
+.bb-card{
+	border: none;
+	border-radius: 0;
+	.bb-card-header{
+		background-color: $primary-color;
+	    border-radius: 0;
+		.bb-card-header-icon{
+			span{
+				color: $text-light;
+			}
+		}
+		h2{
+			color: $text-light;
+			font-weight: 200;
+		}
+	}
+}
+.bb-form{
+	label{
+		font-weight: 500;
+	}
+	input{
+		border: none;
+		border-bottom: 1px solid $text-light;
+		border-radius: 0;
+		font-weight: 300;
+		&:focus{
+			border-bottom: 1px solid #5cb3fd;
+		}
+		&[disabled]{
+			color: $text-dark-light;
+			background: #fff;
+		}
+	}
+}
+@mixin transition($property) {
+  -webkit-transition: $property .25s ease;
+     -moz-transition: $property .25s ease;
+      -ms-transition: $property .25s ease;
+          transition: $property .25s ease;
+}
+.bb-button{
+	font-size: $font-normal;
+	cursor: pointer;
+	text-transform: uppercase;
+	&:focus{
+		box-shadow: none;
+		outline: none;
+	}
+}
+.bb-primary-button{
+	background-color: $secondary-color;
+	color: #fff;
+	border: none;
+	&:hover{
+		background-color: darken($secondary-color , 10%);
+		@include transition(background-color);
+	}
+}
+.bb-font-weight-light{
+	font-weight: 300;
+}
+.bb-font-weight-xlight{
+	font-weight: 200;
+}
+.bb-font-big{
+	font-size: $font-big;
+}
+.bb-clearFilter{
+	background: none;
+    outline: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+    font-size: $font-small;
+    top: 5px;
+    color: $text-light;
+	@include transition(color);
+    &:hover{
+    	color: $text-dark-light;
+    }
+}
+.bb-table{
+	td img{max-width: 50px;}
+	th.no-sort{
+		&:before,
+		&:after{
+			display: none!important;
+		}
+	}
+	tbody{
+		tr{
+			td{
+				border-top: none;
+				&:first-child{
+					border-left: 6px solid orange;
+				}
+			}
+		}
+	}
+}
+.alert{display: none}
+.page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+.page-link {
+    color: $primary-color;
+}

@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Backbase App</title>
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css" />
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+    <!-- Bootstrap 4.0.0 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- Bootstrap Datatables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css">
+    <!-- Google Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Kanit:200,300,400,500,600,700" rel="stylesheet">
+    <!-- Fontawesome 4.7.0 -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+    <!-- Custom Styles -->
+    <link href="assets/css/styles.css" rel="stylesheet">
+  </head>
+  <body class="bb-app">
+    <header class="bb-header mb-5">
+      <div class="container">
+        <nav class="navbar navbar-light">
+          <a class="navbar-brand" href="#">
+            <img src="assets/logo.jpg" alt="Logo">
+          </a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 mb-5">
+          <div class="card bb-card">
+            <div class="card-header bb-card-header text-center">
+              <div class="bb-card-header-icon float-left">
+                <span class="fa fa-refresh"></span>
+              </div>
+              <h2 class="h5 mb-0">
+                Make a transfer
+              </h2>
+            </div>
+            <div class="card-block">
+              <form class="bb-form">
+                <div class="form-group">
+                  <label for="fromAccountInput" class="text-uppercase" >from account</label>
+                  <input type="text" class="form-control pl-0" id="fromAccountInput" value="Free Checking(4692) - $5824.76" disabled>
+                </div>
+                <div class="form-group">
+                  <label for="toAccountInput" class="text-uppercase" >to account</label>
+                  <input type="text" class="form-control pl-0" id="toAccountInput" placeholder="Type here" >
+                </div>
+                <div class="form-group">
+                  <label for="amountInput" class="text-uppercase" >amount</label>
+                  <input type="number" class="form-control pl-0" id="amountInput" placeholder="$0.00" >
+                </div>
+                <button id="submit" type="button" class="btn btn-primary bb-button bb-primary-button float-right pl-5 pr-5" data-target="#bbModal">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-8 mb-5">
+          <div class="card bb-card">
+            <div class="card-header bb-card-header text-center">
+              <div class="bb-card-header-icon float-left mt-3">
+                <span class="fa fa-briefcase bb-font-big"></span>
+              </div>
+              <h2 class="h4 mb-0 p-2">
+                Recent Transactions
+              </h2>
+            </div>
+            <div class="card-block">
+              <table id="bbTable" class="bb-table table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th class="no-sort"></th>
+                        <th>Beneficiary</th>
+                        <th class="text-right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="bbModal" tabindex="-1" role="dialog" aria-labelledby="tModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title font-weight-normal" id="tModalLabel">Submit Transfer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body bb-font-weight-light">
+            <div class="confirmTransaction">
+              <p>Please confirm to submit transaction.</p>
+              <ul class="list-unstyled p-0">
+                <li>
+                  <p class="mb-0" id="">From: <span class="text-muted">Free Checking</span> </p>
+                </li>
+                <li>
+                  <p class="mb-0" id="">Beneficiary: <span id="benefPreview" class="text-muted"></span> </p>
+                </li>
+                <li>
+                  <p class="mb-0" >Amount: <span id="amountPreview" class="text-muted"></span></p>
+                </li>
+              </ul>
+              <div class="alert alert-danger" role="alert">
+                <strong>Yikes!</strong> Looks like you reached the maximum transaction limit.
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="submit" type="button" class="btn btn-secondary bb-button" data-dismiss="modal">Close</button>
+            <button id="confirmTransfer" type="submit" class="btn bb-button bb-primary-button">Accept</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- jquery-3.2.1 -->
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <!-- Tether JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <!-- Bootstrap 4.0.0 JS-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <!-- Datatables JS-->
+  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+  <!-- Custom JS-->
+  <script src="assets/js/script.js"></script>
+  </body>
+</html>
